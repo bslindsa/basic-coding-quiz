@@ -15,6 +15,8 @@ As it is, the application runs as intended, but the code itself has areas that c
 
 The following animation demonstrates the application functionality:
 
+https://bslindsa.github.io/basic-coding-quiz/
+
 
 
 ![A user clicks through an interactive coding quiz, then enters initials to save the high score before resetting and starting over.](./assets/images/code-quiz.gif)
