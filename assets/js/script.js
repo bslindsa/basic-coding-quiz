@@ -5,7 +5,7 @@ var quizBox = document.querySelector(".quiz-box");
 var question = document.querySelector(".question");
 var sub = document.querySelector("#subquestion");
 var choiceList = document.querySelector("#choices");
-var highScoreList = document.querySelector("#high-scores");
+// var highScoreList = document.querySelector("#high-scores");
 var start = document.querySelector(".start");
 var p = document.querySelector("p");
 var result = document.querySelector("#result");
@@ -94,7 +94,7 @@ start.addEventListener("click", countdown);
 
 function countdown() {
     start.remove();
-    secondsLeft = 60;
+    secondsLeft = 30;
     timerInterval = setInterval(function () {
         secondsLeft--;
         timer.textContent = "Time: " + secondsLeft;
@@ -141,6 +141,7 @@ function allDone() {
 
     var submitScore = document.createElement("button");
     submitScore.textContent = "Submit Score";
+    submitScore.setAttribute("style", "color: white; background-color: blue; margin: 5px");
     choiceList.appendChild(submitScore);
 
     submitScore.addEventListener("click", function () {
@@ -149,7 +150,6 @@ function allDone() {
             initials: initials,
             score: totScore
         }
-        //highScores.push(initials + ": " + totScore);
         highScores.push(playerScoreCard);
         localStorage.setItem("scores", JSON.stringify(highScores));
 
@@ -167,10 +167,8 @@ function renderHS() {
     quizBox.innerHTML = "";
     start.remove();
 
-    //sorting scores 
+    //sorting scores in descending order.
     highScores.sort(function (a, b) { return b.score - a.score });
-
-
 
     // Create Table
     var headerHS = document.createElement("h1");
@@ -190,16 +188,14 @@ function renderHS() {
     rankScore.setAttribute("scope", "col")
     var tBodyEl = document.createElement("tbody");
 
-    
+    // Assemble the header of the table
     tRowEl.appendChild(rankNumber);
     tRowEl.appendChild(rankInitials);
     tRowEl.appendChild(rankScore);
     tableHeadEl.appendChild(tRowEl);
     highScoreTable.appendChild(tableHeadEl);
 
-
-
-    // localStorage.getItem(JSON.parse(highScores));
+    // Generate each row of the table
     for (i = 0; i < highScores.length; i++) {
 
         var statsRow = document.createElement("tr");
@@ -234,14 +230,13 @@ function renderHS() {
     // Clear the High Score board.
     var clearHS = document.createElement("button");
     clearHS.textContent = "Clear High Scores";
+    clearHS.setAttribute("style", "color: white; background-color: blue; margin: 5px");
     quizBox.appendChild(clearHS);
     clearHS.addEventListener("click", function () {
         highScores = [];
         localStorage.setItem("scores", JSON.stringify(highScores));
-        highScoreList.innerHTML = "";
+        tBodyEl.innerHTML = "";
     })
-    clearHS.setAttribute("style", "color: white; background-color: blue; margin: 5px");
-
 }
 
 
